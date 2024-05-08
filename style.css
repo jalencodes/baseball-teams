@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body{
+    background: rgb(249,105,13);
+    font-family: Roboto;
+    background: linear-gradient(90deg, grey 0%, rgba(19,0,209,1) 100%);
+    color: aliceblue;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+h1{
+    font-weight: 300;
+    font-size: 55px;
+}
+
+h2{
+    font-size: 45px;
+    font-weight: 400;
+}
+
+#search{
+    width: 30%;
+    height: 40px;
+    border-radius: 35px;
+    border-color: white;
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+#submit{
+    margin-top: 1%;
+    width: 15%;
+}
+
+/* #search: */
+
+
+button{
+    background-color: blue;
+    font-size: 20px;
+    color: aliceblue;
+    border-radius: 20px;
+    width: 150px;
+    border-color: none;
+}
+
+#team-form{
+    width: 100%;
+    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#inputs{
+    display: block;
+}
+
+
+#team-form{
+    transition: opacity 0.75s ease-in-out;
+}
+
+#team-holder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+ #team-holder > img{
+    /* width: 75%;  */
+} 
+
+#response-buttons{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 5%;
+}
+
+
+.iterator-button{
+    height: 90px;
+    width: 90px;
+    border-radius: 70px;
+    font-size: 350%;
+    line-height: 1.6;
+    vertical-align:top;
+    text-align:center
+}
+
+#back{
+    margin-right: 10%;
+}
+
+#next{
+    margin-left: 10%;
+}

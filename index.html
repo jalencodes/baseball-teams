@@ -4,10 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baseball</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./index.js" type="module"></script>
 </head>
 <body>
-    
+    <main>
+        <h1 id="start">Slugger Stats</h1> 
+        
+        <p>We love Baseball here. This is your place to get stats on your favorite teams</p>
+        <div id="team-form">
+
+                <input type="text" name="team_search" id="search" placeholder="What team's stats do you want?">
+                
+                <button type="submit" id="submit">Let's Do It</button>
+        </div>
+        <div id="team-holder">
+            <h2 id="team-name"></h2>
+            <div id="response-buttons">
+                <img src="" alt="">
+            </div>
+        </div>
+        <div id="response-buttons"></div>
+        <div class="response-container"></div>
+        <div class="response-buttons"></div>
+    </main>
 </body>
 </html>

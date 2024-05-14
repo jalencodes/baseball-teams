@@ -113,6 +113,44 @@ const options = {
 function keys(object) { return Object.keys(object) }
 
 
+function getOridinal(num)
+{
+    if (num < 20)
+    {
+        switch (num) 
+        {
+            case 1:
+                return num + 'st'
+
+            case 2:
+                return num + 'nd'
+
+            case 3:
+                return num + 'rd'
+        
+            default:
+                return num + 'th';
+        }
+    }
+    
+    const focusNum = num % 10
+
+    switch (focusNum) 
+    {
+        case 1:
+            return num + 'st'
+
+        case 2:
+            return num + 'nd'
+
+        case 3:
+            return num + 'rd'
+        default:
+            return num + 'th';
+    }
+}
+
+
 async function getTeamStats(id, name)
 {
   options.url    = 'https://api-baseball.p.rapidapi.com/standings'
@@ -133,7 +171,8 @@ async function getTeamStats(id, name)
     const divisionInfo = team[1]
     const leagueName = leagueInfo.group.name
     const divisionName = divisionInfo.group.name
-    console.log(`The ${name} are in the ${leagueName} and their division is ${divisionName}`);  
+    console.log(leagueInfo);
+    console.log(divisionInfo);
   } 
   catch (error) 
   {

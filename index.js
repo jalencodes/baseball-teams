@@ -2,13 +2,13 @@
 
 import { rapid_api_key } from "./api-key.js";
 
-const teamSearcher  = document.getElementById('search')
-const submitBtn     = document.getElementById('submit')
-const teamSearchForm   = document.getElementById('team-form')
-const teamSearchHeader = document.getElementById('team-name')
-const teamSearchImage  = document.querySelector('#response-buttons>img')
-let teamArr = []
-let teamIndex       = 0;
+const teamSearcher      = document.getElementById('search')
+const submitBtn         = document.getElementById('submit')
+const teamSearchForm    = document.getElementById('team-form')
+const teamSearchHeader  = document.getElementById('team-name')
+const teamSearchImage   = document.querySelector('#response-buttons>img')
+let teamArr   = []
+let teamIndex = 0;
 
 
 const options = {
@@ -113,33 +113,43 @@ const options = {
 function keys(object) { return Object.keys(object) }
 
 
-function createButtons()
+async function getTeamStats(id, name)
 {
-    const responseButtons   = document.querySelector('#response-buttons')
-    const backButton        = document.createElement('button')
-    const nextButton        = document.createElement('button')
-    const teamConfirmBtn    = document.createElement('button')
+  options.url    = 'https://api-baseball.p.rapidapi.com/standings'
+  options.params = {
+    league: '1',
+    team: id,
+    season: '2024'
+  }
 
-    backButton.id           = "back"
-    nextButton.id           = "next"
-    teamConfirmBtn.id       = 'confirm-team'
-
-    backButton.textContent  = "◀︎"
-    nextButton.textContent  = "▶︎"
-    teamConfirmBtn.textContent  = "Confirm"
-
-    backButton.classList.add('iterator-button')
-    nextButton.classList.add('iterator-button')
-    
-    responseButtons.prepend(backButton)
-    responseButtons.appendChild(nextButton)
-    // responseButtons.appendChild(teamConfirmBtn)
-
-    backButton.addEventListener('click', getBack)
-    nextButton.addEventListener('click', getNext)
-    // teamConfirmBtn.addEventListener('click', )
-    
+  try 
+  {
+    const response = await axios.request(options);
+    // The fetch request will return two team objects
+    // The first has info relating to its league, 
+    // The second has contains division data  
+    const team = response.data.response[0]
+    const leagueInfo = team[0]
+    const divisionInfo = team[1]
+    const leagueName = leagueInfo.group.name
+    const divisionName = divisionInfo.group.name
+    console.log(`The ${name} are in the ${leagueName} and their division is ${divisionName}`);  
+  } 
+  catch (error) 
+  {
+    console.error(error);
+  }
 }
+
+
+function confirmTeam()
+{
+  const selectedTeam = teamArr[teamIndex]
+  const teamID = selectedTeam.id
+  const teamName = selectedTeam.name
+  getTeamStats(teamID, teamName)
+}
+
 
 function getBack()
 {
@@ -148,11 +158,42 @@ function getBack()
 
 }
 
+
 function getNext()
 {
   teamIndex = teamIndex < (teamArr.length - 1) ? (teamIndex + 1) : 0
   showCurrentTeam()
 }
+
+
+function createButtons()
+{
+  const responseButtons   = document.querySelector('#response-buttons')
+  const responseConfirm   = document.getElementById('response-confirm')
+  const backButton        = document.createElement('button')
+  const nextButton        = document.createElement('button')
+  const teamConfirmBtn    = document.createElement('button')
+
+  backButton.id           = "back"
+  nextButton.id           = "next"
+  teamConfirmBtn.id       = 'confirm-team'
+
+  backButton.textContent  = "◀︎"
+  nextButton.textContent  = "▶︎"
+  teamConfirmBtn.textContent  = "Confirm"
+
+  backButton.classList.add('iterator-button')
+  nextButton.classList.add('iterator-button')
+  
+  responseButtons.prepend(backButton)
+  responseButtons.appendChild(nextButton)
+  responseConfirm.appendChild(teamConfirmBtn)
+
+  backButton.addEventListener('click', getBack)
+  nextButton.addEventListener('click', getNext)
+  teamConfirmBtn.addEventListener('click', confirmTeam)    
+}
+
 
 function showCurrentTeam()
 {

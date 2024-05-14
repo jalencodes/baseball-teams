@@ -3,7 +3,7 @@
 body{
     background: rgb(249,105,13);
     font-family: Roboto;
-    background: linear-gradient(90deg, grey 0%, rgba(19,0,209,1) 100%);
+    background: linear-gradient(90deg,grey 0%, rgba(19,0,209,1) 100%);
     color: aliceblue;
 }
 
@@ -13,7 +13,6 @@ main{
     justify-content: center;
     align-items: center;
 }
-
 
 h1{
     font-weight: 300;
@@ -96,12 +95,15 @@ button{
 
 #back{
     margin-right: 10%;
+    transition: .8s;
 }
 
 #next{
     margin-left: 10%;
+    transition: .8s;
 }
 
 #response-confirm{
+    transition: .8s;
     padding-top: 5%;
 }

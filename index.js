@@ -167,12 +167,47 @@ async function getTeamStats(id, name)
     // The first has info relating to its league, 
     // The second has contains division data  
     const team = response.data.response[0]
-    const leagueInfo = team[0]
-    const divisionInfo = team[1]
-    const leagueName = leagueInfo.group.name
-    const divisionName = divisionInfo.group.name
-    console.log(leagueInfo);
-    console.log(divisionInfo);
+    const leagueInfo    = team[0]
+    const leagueName    = leagueInfo.group.name
+    const leagueRank    = getOridinal(leagueInfo.position)
+    const divisionInfo  = team[1]
+    const divisionName  = divisionInfo.group.name
+    const divisionRank  = getOridinal(divisionInfo.position)
+    const winCount      = leagueInfo.games.win.total
+    const lossCount     = leagueInfo.games.lose.total
+    const winPercentage = leagueInfo.games.win.percentage
+
+    const nextBtn       = document.getElementById('next')
+    const backBtn       = document.getElementById('back')
+    const confirmBtn    = document.getElementById('confirm-team')
+
+    nextBtn.style.opacity    = 0
+    backBtn.style.opacity    = 0
+    confirmBtn.style.opacity = 0
+
+    setTimeout(() => {
+      nextBtn.parentNode.removeChild(nextBtn)
+      backBtn.parentNode.removeChild(backBtn)
+      confirmBtn.parentNode.removeChild(confirmBtn)
+    }, 800)
+
+    const mainEL    = document.getElementById('main')
+    const teamStats = document.createElement('ul')
+
+    const win_ratio       = `${winCount} - ${lossCount} (${winPercentage})`
+    const divisionRankMsg = `${divisionRank} in ${divisionName}`
+    const leagueRankMsg   = `${leagueRank} in ${leagueName}`
+    
+    let stat1  = document.createElement('li')
+    let stat2  = document.createElement('li')
+    let stat3  = document.createElement('li')
+
+    stat1.innerHTML = win_ratio
+    stat2.innerHTML = divisionRankMsg
+    stat3.innerHTML = leagueRankMsg
+
+    teamStats.append(stat1, stat2, stat3)
+    mainEL.append(teamStats)
   } 
   catch (error) 
   {
@@ -230,7 +265,7 @@ function createButtons()
 
   backButton.addEventListener('click', getBack)
   nextButton.addEventListener('click', getNext)
-  teamConfirmBtn.addEventListener('click', confirmTeam)    
+  teamConfirmBtn.addEventListener('click', confirmTeam)
 }
 
 

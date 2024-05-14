@@ -107,3 +107,12 @@ button{
     transition: .8s;
     padding-top: 5%;
 }
+
+ul{
+    list-style: none;
+}
+
+li{
+    font-size: 20px;
+    padding-top: 3%;
+}
